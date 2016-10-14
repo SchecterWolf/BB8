@@ -16,17 +16,30 @@
  * 
  */
 
-#ifndef _LOGGER_H
-#define _LOGGER_H
+#ifndef _BB8_LOGGER_H
+#define _BB8_LOGGER_H
 
+#include <list>
 #include <string>
 
-class LogContext;
+#include "LogContext.h"
+#include "LogFormat.h"
 
+/**
+ * Abstract class for all log classes that wish to perform logging
+ */
 class Logger
 {
     public:
-        virtual ~Logger() {};
-        virtual log(const &tLogContext, const std::string &strLog) = 0;
+        Logger();
+        Logger(std::list<LogFormat *> &listInitFormatters);
+        virtual ~Logger();
+
+        virtual void log(const LogContext &tLogContext, const std::string &strLog) = 0;
+
+    protected:
+        std::list<LogFormat *> listFormatters;
+
+        void addFormatter(LogFormat *ptFormat);
 };
 #endif

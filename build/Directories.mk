@@ -7,6 +7,7 @@
 #
 # Output:
 # 		SRC_MODULES 		src module directories for the build
+# 		SRC_MAIN 			directory of the main
 # 		INCLUDES 			include directories
 #
 #
@@ -15,11 +16,17 @@
 # 		SRC += $(wildcard <Directory>/*.cpp)
 #
 
+# Alphabetical
 SRC_MODULES := \
-					src/main \
-					src/main/utils \
+					src/common/commondefs \
 					src/controller \
 					src/directives/followme \
-					src/common/commondefs \
+					src/main/sub \
+					src/main/utils \
+					src/utils \
+					src/utils/log \
+					src/utils/macro \
 
+
+SRC_MAIN := src/main/
 INCLUDES := $(SRC_MODULES)

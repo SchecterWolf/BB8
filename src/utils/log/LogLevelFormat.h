@@ -16,41 +16,23 @@
  * 
  */
 
-#ifndef _CMDPARSER_H
-#define _CMDPARSER_H
+#ifndef _LOGLEVELFORMAT_H
+#define _LOGLEVELFORMAT_H
 
-#include <argp.h>
+#include "LogFormat.h"
 
 /**
- * This class handles that command line args given to the program
- * It also defines which type of args we will handle
+ * Log formatter that adds a "level" to the log message
  */
-class CMDParser
+class LogLevelFormat : public LogFormat
 {
-    typedef struct arguments
-    {
-        int iVerbose;
-        int iQuiet;
-        const char *pszConfigFile;
-    } T_Arguments;
-
     public:
-        CMDParser(int argc, char **argv); 
-        ~CMDParser();
+        virtual ~LogLevelFormat() {};
 
-        // argp globals
-        const char *args_doc;
-
-        struct argp_option *ptOptions;
-        struct argp tArgp;
-
-        static error_t parse_opt(int iKey, char *pszArg, struct argp_state *ptState);
- 
-    private:
-        T_Arguments tGivenArgs;
-
-        void initCommandLineOptions();
-        void initDefaultProgramOptions();
-        void printDebug() const; 
+        // LogFormat virtuals
+        virtual int getFormatOrder() const override;
+        virtual void formatLog(const LogContext &tLogContext, std::string &strLog) const override;
 };
+
 #endif
+

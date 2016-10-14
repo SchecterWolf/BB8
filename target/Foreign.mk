@@ -42,10 +42,6 @@ ifeq ($(OS), linux)
 	LDFLAGS+=-lpthread -ldl
 endif
 
-ifneq ($(PROJECT), $(BB8_NAME))
-#	LDFLAGS+=-L$(BB8_TARGET)
-endif
-
 #
 # Make Directives
 #

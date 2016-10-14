@@ -66,10 +66,16 @@
  *      9. various sensors
  */
 
-#include "CMDParser.h"
+#include <stdio.h>
+
+#include "CMDLineParser.h"
+#include "DroidMain.h"
 
 int main (int argc, char **argv) {
-    CMDParser tParser(argc, argv);
+    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
 
-    return 0; // TODO return actual ret code
+    int iRet = tMain.run();
+
+    printf("Droid operations completed.\n");
+    return iRet;
 }

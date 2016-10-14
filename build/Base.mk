@@ -10,6 +10,7 @@
 # 			MKDIR 		Make directory command
 #
 # 			CXXFLAGS 	c++ flags
+# 			FINAL_FLAGS 	additional flags for main make target
 # 			FLAGS 		top level directive flags
 # 			CXX 		compiler
 # 			LDFLAGS 	flags for the linker
@@ -36,16 +37,17 @@ include $(BUILD_BASE_DIR)Directories.mk
 MKDIR=@mkdir -p
 
 # C++ flags
-CXXFLAGS+=-ggdb3 \
-			-Wall -Werror -Wformat=2 -Wno-write-strings \
-			-Wno-long-long -Wno-variadic-macros -Wno-unused-parameter -fno-omit-frame-pointer \
+CPPFLAGS+=-ggdb3 -std=c++0x
+CXXFLAGS+=-Wall -Werror -Wformat=2 -Wno-write-strings \
+			-Wno-variadic-macros -Wno-unused-parameter -fno-omit-frame-pointer \
 			-fno-common -Wno-strict-aliasing \
 			-Wunreachable-code -Wlogical-op -Wstrict-overflow=1 \
 			-ffloat-store -Wpointer-arith -Winline -Wundef -Wfloat-equal -Wcast-align \
-			-fstrict-aliasing -Wstrict-aliasing=2 -Wswitch-default -Wswitch-enum \
-			-Wlong-long -Wvariadic-macros -Wunused-parameter -fomit-frame-pointer \
-			-Wformat-security -Werror=format-security -Wno-parentheses
-CXXFLAGS+=-Wno-overloaded-virtual -std=c++0x -c
+			-fstrict-aliasing -Wstrict-aliasing=2 -Wswitch-default \
+			-Wvariadic-macros -Wunused-parameter -fomit-frame-pointer \
+			-Wformat-security -Werror=format-security -Wno-parentheses \
+			-Wno-overloaded-virtual -Wno-unused-function -c
+FINAL_FLAGS+=-Wno-unused-function
 
 # utilize the gnu compiler to make temporary dependency files
 DEPFLAGS+=-MMD -MP -MF $*.Td

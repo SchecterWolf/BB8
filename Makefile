@@ -29,15 +29,19 @@ $(BB8_TARGET)deps:
 #
 bin: $(BB8_FINAL)
 
-$(BB8_FINAL): $(OBJS)
-	$(CXX) $(OBJS) $(LDFLAGS) -o $(BB8_FINAL)
+$(BB8_FINAL): $(OBJS) $(BB8_TARGET)main.o
+	$(CXX) $(OBJS) $(BB8_TARGET)main.o $(LDFLAGS) -o $(BB8_FINAL)
 
 #
 # Intermediate objects
 #
 $(BB8_TARGET)%.o: %.cpp
 	$(MKDIR) $(shell dirname $@)
-	$(CXX) $(DEPFLAGS) $(INCLUDE_FLAGS) $(CXXFLAGS) $< -o $@
+	$(CXX) $(DEPFLAGS) $(INCLUDE_FLAGS) $(CPPFLAGS) $(CXXFLAGS) $< -o $@
 	$(POSTCOMPILE)
+
+# Dones use error flags on main
+$(BB8_TARGET)main.o: $(SRC_MAIN)main.cpp
+	$(CXX) $(DEPFLAGS) $(INCLUDE_FLAGS) $(CPPFLAGS) -c $< -o $@
 
 %.d: ;

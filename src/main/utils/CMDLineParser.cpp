@@ -18,19 +18,19 @@
 
 #include <stdlib.h>
 
-#include "CMDParser.h"
+#include "CMDLineParser.h"
 #include "Version.h"
 
-#define DEBUG_PRINT
+//#define DEBUG_PRINT
 #define DEFAULT_CONFIG_FILE "/etc/BB8/BB.config"
 
 /** 
- * CMDParser constructor
+ * CMDLineParser constructor
  * 
  * @param argc  Arg num given from main
  * @param argv  Args given from main
  */
-CMDParser::CMDParser(int argc, char **argv)
+CMDLineParser::CMDLineParser(int argc, char **argv)
 {
     argp_program_version = pszBB8Version;
     argp_program_bug_address = pszBugInfo;
@@ -51,12 +51,22 @@ CMDParser::CMDParser(int argc, char **argv)
 }
 
 /** 
- * CMDParser destructor
+ * CMDLineParser destructor
  */
-CMDParser::~CMDParser()
+CMDLineParser::~CMDLineParser()
 {
     if (ptOptions)
         free(ptOptions);
+}
+
+/** 
+ * Get the parsed command line args that were issued
+ * 
+ * @return Parsed args struct
+ */
+const T_Arguments CMDLineParser::getArgs() const
+{
+    return tGivenArgs;
 }
 
 /** 
@@ -68,7 +78,7 @@ CMDParser::~CMDParser()
  * 
  * @return  0 for success, ARGP_ERR_UNKNOWN if the value of key is not handled, or a unix error code
  */
-error_t CMDParser::parse_opt(int iKey, char *pszArg, struct argp_state *ptState)
+error_t CMDLineParser::parse_opt(int iKey, char *pszArg, struct argp_state *ptState)
 {
     error_t iRet = 0;
     T_Arguments *ptArgs = reinterpret_cast<T_Arguments *>(ptState->input);
@@ -97,7 +107,7 @@ error_t CMDParser::parse_opt(int iKey, char *pszArg, struct argp_state *ptState)
  * by this program.
  * Note: make sure to update the struct arguments and parseOpt callback as well
  */
-void CMDParser::initCommandLineOptions()
+void CMDLineParser::initCommandLineOptions()
 {
     int iNumOptions = 0;
 
@@ -127,7 +137,7 @@ void CMDParser::initCommandLineOptions()
 /** 
  * Initialize the default argument values
  */
-void CMDParser::initDefaultProgramOptions()
+void CMDLineParser::initDefaultProgramOptions()
 {
     tGivenArgs.iVerbose = 0;
     tGivenArgs.iQuiet = 0;
@@ -137,7 +147,7 @@ void CMDParser::initDefaultProgramOptions()
 /** 
  * Debug print the command line args the has been parsed
  */
-void CMDParser::printDebug() const
+void CMDLineParser::printDebug() const
 {
     fprintf(stderr, "Printing parsed command line args:\n");
     fprintf(stderr, "Verbose:\t%d\n" \
