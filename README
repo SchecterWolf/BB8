@@ -1,0 +1,80 @@
+BB-8 controller program
+
+Description:
+
+Main entry point into the BB-8 control routines.
+The controler should initialize all BB-8 resources needed
+by the various control directives.
+The main controller will listen on localhost for vairous commands
+that will control the overall behaviour of the BB-8.
+See the README for details of these commands
+
+
+
+Directives:
+
+These are the various modes that the BB-8 will operate in.
+The modes are mutually exclusive with other modes
+1. Followme - Directs the BB-8 to follow a bluetooth signal
+2. Remote control - BB-8 can be controlled with a remot control
+                    via a bluetooth teather to an Android phone.
+3. Patrol - BB-8 will "wonder" around within a certain perimeter.
+            TODO havent decided what other functionality will
+            pair with this directive.
+4. Game - TODO Think of some cool games that can be played
+          with the BB-8 (jousting)
+
+
+
+Functions:
+
+These MAY be enabled for any of the previously mentioned directive
+modes
+1. Projector - Will activate an on-board pocket project and
+               display videos, feeds, etc
+2. Speaker - Functions as a bluetooth speaker would
+3. Record - Enables an on-board camera and records
+4. Live stream - Will record and live stream through an internet
+                 connection
+5. Access point - Functions as a wireless hotspot
+6. Camera - Takes photos
+7. Interactive - Tries to recognize human shape/gestures and
+                 reacts to them
+
+
+
+Features:
+
+Various capabilities
+1. Bluetooth
+2. Wifi
+3. Web interface
+4. SSH
+5. Access point
+6. chassy lights
+7. speaker, voice module
+8. Camera
+9. various sensors
+
+
+
+Config:
+
+The config file's format is as follows:
+# comments
+<section title>
+option name: option value
+
+The following will describe each configurable section with their option names
+and their acceptable [values]
+
+<log>
+
+Set the log level
+level: [None,Critical,Error,Warn,Info,Debug]
+
+Turn console logging on or off
+console: [0,1]
+
+Turn file loggin on or ogg
+file: [abs/path/to/filename.txt]

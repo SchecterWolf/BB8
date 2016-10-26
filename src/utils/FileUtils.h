@@ -16,32 +16,16 @@
  * 
  */
 
-#ifndef _LOGLEVEL_H
-#define _LOGLEVEL_H
+#ifndef _FILEUTILS_H
+#define _FILEUTILS_H
 
 #include <string>
 
-/**
- * Handles log level things
- */
-class LogLevel
+class FileUtils
 {
     public:
-        enum Level
-        {
-            None = 0,
-            Critical,
-            Error,
-            Warn,
-            Info,
-            Debug,
-
-            LevelCount
-        };
-
-        std::string getStrFromLevel(enum Level eLogLevel) const;
-        enum Level getLevelFromStr(const std::string &strLevel) const;
+        bool readFile(const std::string &strFileName, std::string &strOutput) const;
+        bool writeFile(const std::string &strFileName, const std::string &strInput) const;
 };
 
 #endif
-

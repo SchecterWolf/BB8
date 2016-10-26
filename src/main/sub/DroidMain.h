@@ -20,7 +20,11 @@
 #define _DROIDMAIN_H
 
 #include "CMDLineArgs.h"
+#include "BBConfig.h"
 
+/**
+ * Entry point for droid operations
+ */
 class DroidMain final
 {
     public:
@@ -30,9 +34,11 @@ class DroidMain final
         int run();
 
     private:
+        BBConfig *ptConfig;
         T_Arguments tArgs;
 
         void initGlobalLogger() const;
+        void readConfig();
 };
 
 #endif

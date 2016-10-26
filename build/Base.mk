@@ -37,7 +37,7 @@ include $(BUILD_BASE_DIR)Directories.mk
 MKDIR=@mkdir -p
 
 # C++ flags
-CPPFLAGS+=-ggdb3 -std=c++0x
+CPPFLAGS+=-ggdb3 -std=c++0x -O0
 CXXFLAGS+=-Wall -Werror -Wformat=2 -Wno-write-strings \
 			-Wno-variadic-macros -Wno-unused-parameter -fno-omit-frame-pointer \
 			-fno-common -Wno-strict-aliasing \

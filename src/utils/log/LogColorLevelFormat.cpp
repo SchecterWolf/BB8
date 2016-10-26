@@ -28,7 +28,7 @@ using namespace std;
  */
 void LogColorLevelFormat::formatLog(const LogContext &tLogContext, string &strLog) const
 {
-    ColorString strLevelColor(getColorFromLevel(tLogContext.getLogLevel()), LogLevel().getLevelStr(tLogContext.getLogLevel()));
+    ColorString strLevelColor(getColorFromLevel(tLogContext.getLogLevel()), LogLevel().getStrFromLevel(tLogContext.getLogLevel()));
     strLog.insert(0, strLevelColor + " | ");
 }
 

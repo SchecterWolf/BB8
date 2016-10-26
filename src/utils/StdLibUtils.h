@@ -31,7 +31,7 @@ class StdLibUtils
          * @param tContainer    std container
          */
         template<typename T>
-        void freeObjects(T tContainer)
+        void freeObjects(T &tContainer)
         {
             for (auto obj : tContainer)
             {

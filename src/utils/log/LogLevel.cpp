@@ -16,6 +16,8 @@
  * 
  */
 
+#include <algorithm>
+
 #include "LogLevel.h"
 
 using namespace std;
@@ -27,7 +29,7 @@ using namespace std;
  * 
  * @return Level string
  */
-string LogLevel::getLevelStr(enum LogLevel::Level eLogLevel) const
+string LogLevel::getStrFromLevel(enum LogLevel::Level eLogLevel) const
 {
     string strRet;
 
@@ -48,10 +50,36 @@ string LogLevel::getLevelStr(enum LogLevel::Level eLogLevel) const
         case Debug:
             strRet = "Debug";
             break;
-        case None:
         default:
             break;
     }
 
     return strRet;
+}
+
+/** 
+ * Get the level enum from a string
+ * 
+ * @param strLevel  Level string
+ * 
+ * @return Level enum
+ */
+enum LogLevel::Level LogLevel::getLevelFromStr(const string &strLevel) const
+{
+    enum Level eLevel = None;
+    string strLevelLower = strLevel;
+
+    // We want a case insensitive comparison
+    transform(strLevelLower.begin(), strLevelLower.end(), strLevelLower.begin(), ::tolower);
+
+    for (int i = None + 1; eLevel == None && i < LevelCount; i++)
+    {
+        string strLower = getStrFromLevel((enum Level)i);
+        transform(strLower.begin(), strLower.end(), strLower.begin(), ::tolower);
+
+        if (strLower == strLevelLower)
+            eLevel = (enum Level)i;
+    }
+
+    return eLevel;
 }

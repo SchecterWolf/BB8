@@ -39,5 +39,5 @@ int LogLevelFormat::getFormatOrder() const
  */
 void LogLevelFormat::formatLog(const LogContext &tLogContext, string &strLog) const
 {
-    strLog.insert(0, LogLevel().getLevelStr(tLogContext.getLogLevel()) + "| ");
+    strLog.insert(0, LogLevel().getStrFromLevel(tLogContext.getLogLevel()) + "| ");
 }

@@ -16,32 +16,36 @@
  * 
  */
 
-#ifndef _LOGLEVEL_H
-#define _LOGLEVEL_H
+#include <sstream>
 
-#include <string>
+#include "StringUtils.h"
 
-/**
- * Handles log level things
+using namespace std;
+
+/** 
+ * Convert a string value into its bool representation
+ * (1, Y, true)
+ * 
+ * @param str   string input
+ * 
+ * @return true if interpreted as such, false otherwise
  */
-class LogLevel
+bool StringUtils::getStringBool(const string &str) const
 {
-    public:
-        enum Level
-        {
-            None = 0,
-            Critical,
-            Error,
-            Warn,
-            Info,
-            Debug,
+    bool bRet = false;
 
-            LevelCount
-        };
+    if (str.empty())
+        return false;
 
-        std::string getStrFromLevel(enum Level eLogLevel) const;
-        enum Level getLevelFromStr(const std::string &strLevel) const;
-};
+    // Try the cheap check first
+    bRet = str[0] == 'y' || str[0] == 'Y';
 
-#endif
+    // Try lexical translation
+    if (!bRet)
+    {
+        istringstream ss(str);
+        ss >> bRet || ss >> boolalpha >> bRet;
+    }
 
+    return bRet;
+}

@@ -37,7 +37,7 @@ class LogContext
         void setLogCategory(enum LogCategory::Category eCategory);
         enum LogCategory::Category getLogCategory() const;
 
-        void setSource(const std::string strSource);
+        void setSource(const std::string &strSource);
         const std::string &getSource() const;
 
         void setLine(int iLine);

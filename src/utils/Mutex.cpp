@@ -34,11 +34,11 @@ Mutex::Mutex()
     if (pthread_mutex_init(ptMTX, &tAttr) != 0)
     {
         free(ptMTX);
-        ptMTX= NULL;
+        ptMTX= nullptr;
     }
 
     if (!ptMTX)
-        logError(General, "Failed to create mutex.");
+        logError(General, "Failed to create mutex");
 }
 
 /** 
@@ -55,7 +55,7 @@ Mutex::~Mutex()
 void Mutex::lock()
 {
     if (ptMTX && pthread_mutex_lock(ptMTX) != 0)
-        logError(General, "Could not lock mutex.");
+        logError(General, "Could not lock mutex");
 }
 
 /** 
@@ -64,7 +64,7 @@ void Mutex::lock()
 void Mutex::unlock()
 {
     if (ptMTX && pthread_mutex_unlock(ptMTX) != 0)
-        logError(General, "Could not unlock mutex.");
+        logError(General, "Could not unlock mutex");
 }
 
 /** 

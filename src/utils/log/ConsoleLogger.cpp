@@ -70,5 +70,5 @@ void ConsoleLogger::log(const LogContext &tLogContext, const string &strLog)
     for (auto formatter : listFormatters)
         formatter->formatLog(tLogContext, str);
 
-    cout << str << "\n";
+    cout << str << ".\n";
 }

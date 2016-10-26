@@ -22,7 +22,7 @@
 #include "Version.h"
 
 //#define DEBUG_PRINT
-#define DEFAULT_CONFIG_FILE "/etc/BB8/BB.config"
+#define DEFAULT_CONFIG_FILE "/etc/BB8/Intellex-BB.conf"
 
 /** 
  * CMDLineParser constructor

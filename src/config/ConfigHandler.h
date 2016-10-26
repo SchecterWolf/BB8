@@ -16,32 +16,21 @@
  * 
  */
 
-#ifndef _LOGLEVEL_H
-#define _LOGLEVEL_H
+#ifndef _CONFIGHANDLER_H
+#define _CONFIGHANDLER_H
 
-#include <string>
+#include "BBConfig.h"
 
 /**
- * Handles log level things
+ * Handles the reading/parsing and writing of config containers
  */
-class LogLevel
+class ConfigHandler
 {
     public:
-        enum Level
-        {
-            None = 0,
-            Critical,
-            Error,
-            Warn,
-            Info,
-            Debug,
+        virtual ~ConfigHandler() {};
 
-            LevelCount
-        };
-
-        std::string getStrFromLevel(enum Level eLogLevel) const;
-        enum Level getLevelFromStr(const std::string &strLevel) const;
+        BBConfig *readConfigFile(const std::string &strFileName) const;
+        bool saveConfigFile(const BBConfig &tConfig, const std::string &strFileName) const;
 };
 
 #endif
-

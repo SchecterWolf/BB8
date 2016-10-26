@@ -19,6 +19,7 @@
 # Alphabetical
 SRC_MODULES := \
 					src/common/commondefs \
+					src/config \
 					src/controller \
 					src/directives/followme \
 					src/main/sub \

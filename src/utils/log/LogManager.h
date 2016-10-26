@@ -35,7 +35,7 @@ class LogManager final
         void addLogger(Logger *ptLogger);
         void setLogLevel(enum LogLevel::Level eLevel);
         void clearLoggers();
-        void log(const LogContext &tContext, const std::string strLog);
+        void log(const LogContext &tContext, const std::string &strLog);
         void log(const LogContext &tContext, const char *pszFormat, ...);
 
         // Log singleton

@@ -16,32 +16,18 @@
  * 
  */
 
-#ifndef _LOGLEVEL_H
-#define _LOGLEVEL_H
+#ifndef _SERIALIZER_H
+#define _SERIALIZER_H
 
 #include <string>
 
-/**
- * Handles log level things
- */
-class LogLevel
+class Serializer
 {
     public:
-        enum Level
-        {
-            None = 0,
-            Critical,
-            Error,
-            Warn,
-            Info,
-            Debug,
+        virtual ~Serializer() {};
 
-            LevelCount
-        };
-
-        std::string getStrFromLevel(enum Level eLogLevel) const;
-        enum Level getLevelFromStr(const std::string &strLevel) const;
+        virtual std::string toString() const = 0;
+        virtual void fromString(const std::string &strSerial) = 0;
 };
 
 #endif
-

@@ -16,32 +16,33 @@
  * 
  */
 
-#ifndef _LOGLEVEL_H
-#define _LOGLEVEL_H
+#ifndef _BBCONFIG_H
+#define _BBCONFIG_H
 
+#include <memory>
 #include <string>
+#include <vector>
+
+#include "ConfigSector.h"
 
 /**
- * Handles log level things
+ * Config container that holds and manages all config sectors that were parsed
+ * from the config file
  */
-class LogLevel
+class BBConfig
 {
     public:
-        enum Level
-        {
-            None = 0,
-            Critical,
-            Error,
-            Warn,
-            Info,
-            Debug,
+        BBConfig();
+        virtual ~BBConfig();
 
-            LevelCount
-        };
+        void addSector(std::unique_ptr<ConfigSector> ptSector);
+        bool removeSector(const std::string &strVal, int iIndex = 0);
+        ConfigSector *getSector(const std::string &strVal, int iIndex = 0);
+        std::vector<ConfigSector *> getSectors(const std::string &strVal, int iIndex = 0);
+        const std::vector<ConfigSector *> getAllSectors() const;
 
-        std::string getStrFromLevel(enum Level eLogLevel) const;
-        enum Level getLevelFromStr(const std::string &strLevel) const;
+    private:
+        std::vector<ConfigSector *> vecSectors;
 };
 
 #endif
-

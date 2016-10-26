@@ -89,7 +89,7 @@ void LogManager::log(const LogContext &tContext, const char *pszFormat, ...)
  * @param tContext  Log ingfo
  * @param strLog    Log message
  */
-void LogManager::log(const LogContext &tContext, const string strLog)
+void LogManager::log(const LogContext &tContext, const string &strLog)
 {
     // Dont log if this level has not been enabled
     if (!enabledLevel(tContext.getLogLevel()))

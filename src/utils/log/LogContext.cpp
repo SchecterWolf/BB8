@@ -89,7 +89,7 @@ enum LogCategory::Category LogContext::getLogCategory() const
  * 
  * @param strSource     Log source
  */
-void LogContext::setSource(const string strSource)
+void LogContext::setSource(const string &strSource)
 {
     this->strSource = strSource;
 }

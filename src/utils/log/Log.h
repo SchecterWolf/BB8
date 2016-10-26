@@ -26,7 +26,10 @@
  */
 
 #define _INTERNAL_BB8_LOG(_logLevel, _logCategory, ret, _format, _args...) \
-            LogManager::gtLog.log(LogContext(_logLevel, LogCategory::_logCategory, __FILE__, __LINE__), _format, ## _args) \
+            ( \
+                LogManager::gtLog.log(LogContext(_logLevel, LogCategory::_logCategory, __FILE__, __LINE__), _format, ## _args), \
+                ret \
+            )
 
 #define logCritical(_logCategory, _format, _args...) _INTERNAL_BB8_LOG(LogLevel::Critical, _logCategory, false, _format, ## _args)
 #define logError(_logCategory, _format, _args...) _INTERNAL_BB8_LOG(LogLevel::Error, _logCategory, false, _format, ## _args)
