@@ -16,18 +16,21 @@
  * 
  */
 
-#ifndef _SERIALIZER_H
-#define _SERIALIZER_H
+#ifndef _DIRECTIVETASK_H
+#define _DIRECTIVETASK_H
 
-#include <string>
+#include "Task.h"
 
-class Serializer
+/** 
+ * Base for all directive task types. Provides convenience functions for directives.
+ * Only one directive task shall be runnning at any given time.
+ * Directives are "modes" of operations the robot will operate in
+ */
+class DirectiveTask : public Task
 {
     public:
-        virtual ~Serializer() {};
-
-        virtual std::string toString() const = 0;
-        virtual void fromString(const std::string &strSerial) = 0;
+        DirectiveTask();
+        virtual ~DirectiveTask();
 };
 
 #endif

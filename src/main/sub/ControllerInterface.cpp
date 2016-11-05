@@ -16,25 +16,35 @@
  * 
  */
 
-#include <stdio.h>
-
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include "ControllerInterface.h"
+#include "Log.h"
 
 /** 
- * Main entry point
+ * ControllerInterface contructor
  * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+ * @param tArgs     Command line args
  */
-int main (int argc, char **argv)
+ControllerInterface::ControllerInterface(const T_Arguments &tArgs)
+    : tArgs(tArgs)
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
 
-    int iRet = tMain.run();
+}
 
-    printf("Droid operations completed.\n");
-    return iRet;
+/** 
+ * ControllerInterface destructor
+ */
+ControllerInterface::~ControllerInterface()
+{
+
+}
+
+/** 
+ * Begin the robot control routine
+ * 
+ * @return The return status action
+ */
+enum ControllerInterface::ReturnStatus ControllerInterface::run()
+{
+    logDebug(General, "Start controller interface");
+    return StatusOK;
 }

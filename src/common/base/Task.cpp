@@ -16,25 +16,28 @@
  * 
  */
 
-#include <stdio.h>
-
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include "Task.h"
 
 /** 
- * Main entry point
- * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+ * Task constructor
  */
-int main (int argc, char **argv)
+Task::Task() : Threadable((ThreadFunction)&Task::anchorPoint)
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
 
-    int iRet = tMain.run();
+}
 
-    printf("Droid operations completed.\n");
-    return iRet;
+/** 
+ * Task destructor
+ */
+Task::~Task()
+{
+
+}
+
+/** 
+ * Wrapper for a non-virtual function
+ */
+void Task::anchorPoint()
+{
+    threadEntryPoint();
 }

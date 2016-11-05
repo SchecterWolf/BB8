@@ -16,25 +16,34 @@
  * 
  */
 
-#include <stdio.h>
+#ifndef _THREADABLE_H
+#define _THREADABLE_H
 
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include <pthread.h>
 
-/** 
- * Main entry point
- * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+typedef void *(*ThreadFunc)(void*);
+
+/**
+ * Inherit this class to make a class function as a thread.
+ * Threadable classes can be "run", which will trigger the start of a new thread.
  */
-int main (int argc, char **argv)
+class Threadable
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
+    public:
+        typedef void (Threadable::*ThreadFunction)(void);
 
-    int iRet = tMain.run();
+        Threadable(Threadable::ThreadFunction pfEntryFunct);
+        virtual ~Threadable();
 
-    printf("Droid operations completed.\n");
-    return iRet;
-}
+        bool run();
+        bool join();
+        bool kill();
+
+    private:
+        Threadable::ThreadFunction pfEntryFunct;
+        pthread_t uiThreadID;
+
+        static void *threadEntry(void *pvThread);
+};
+
+#endif

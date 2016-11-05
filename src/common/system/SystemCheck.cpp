@@ -16,25 +16,44 @@
  * 
  */
 
-#include <stdio.h>
-
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include "SystemCheck.h"
+#include "Log.h"
 
 /** 
- * Main entry point
- * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+ * SystemCheck constructor
  */
-int main (int argc, char **argv)
+SystemCheck::SystemCheck()
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
 
-    int iRet = tMain.run();
+}
 
-    printf("Droid operations completed.\n");
-    return iRet;
+/** 
+ * SystemCheck destructor
+ */
+SystemCheck::~SystemCheck()
+{
+
+}
+
+/** 
+ * Check system features
+ * 
+ * @return true if system checks pass, false on error (error msg set)
+ */
+bool SystemCheck::runCheck()
+{
+    /**
+     * TODO things to check
+     *
+     * temperature
+     * motors
+     * bluetooth
+     * sdcard
+     * memory
+     * battery level
+     * gpio
+     */
+    logDebug(General, "Perform system check...");
+
+    return false;
 }

@@ -16,25 +16,21 @@
  * 
  */
 
-#include <stdio.h>
+#ifndef _SYSTEMCHECK_H
+#define _SYSTEMCHECK_H
 
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include "ErrorHolder.h"
 
-/** 
- * Main entry point
- * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+/**
+ * Performs a system check on critical system features that will be utilized
  */
-int main (int argc, char **argv)
+class SystemCheck : public ErrorHolder
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
+    public:
+        SystemCheck();
+        virtual ~SystemCheck();
 
-    int iRet = tMain.run();
+        bool runCheck();
+};
 
-    printf("Droid operations completed.\n");
-    return iRet;
-}
+#endif

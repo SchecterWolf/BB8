@@ -16,25 +16,20 @@
  * 
  */
 
-#include <stdio.h>
-
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include "DirectiveTask.h"
 
 /** 
- * Main entry point
- * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+ * DirectiveTask constructor
  */
-int main (int argc, char **argv)
+DirectiveTask::DirectiveTask()
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
 
-    int iRet = tMain.run();
+}
 
-    printf("Droid operations completed.\n");
-    return iRet;
+/** 
+ * DirectiveTask destructor
+ */
+DirectiveTask::~DirectiveTask()
+{
+
 }

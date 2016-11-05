@@ -32,6 +32,7 @@ using namespace std;
  * @param tArgs     Parsed args given from the command line
  */
 DroidMain::DroidMain(const T_Arguments &tArgs)
+    : tInterfaceCtrl(tArgs)
 {
     this->tArgs = tArgs;
     ptConfig = nullptr;
@@ -54,10 +55,15 @@ DroidMain::~DroidMain()
  */
 int DroidMain::run()
 {
-    readConfig();
-    initGlobalLogger();
+    enum ControllerInterface::ReturnStatus eRet = ControllerInterface::StatusError;
 
-    return 0;
+    if (readConfig())
+    {
+        initGlobalLogger();
+        eRet = tInterfaceCtrl.run();
+    }
+
+    return interpretReturn(eRet);
 }
 
 /** 
@@ -96,16 +102,48 @@ void DroidMain::initGlobalLogger() const
 
 /** 
  * Read in the config file
+ *
+ * @return true if successfully read in config file, false if not
  */
-void DroidMain::readConfig()
+bool DroidMain::readConfig()
 {
     ptConfig = ConfigHandler().readConfigFile(tArgs.pszConfigFile);
 
-    // Use an empty config if we couldnt read one in
+    // Something went wrong reading in the config file
     if (!ptConfig)
-    {
-        logWarn(General, "Failed to read in config file \"%s\"", tArgs.pszConfigFile);
-        ptConfig = new BBConfig();
-    }
+        logCritical(General, "Failed to read in config file \"%s\"", tArgs.pszConfigFile);
+
+    return (bool)ptConfig;
 }
 
+/** 
+ * Interpret the return status of the control interface
+ * 
+ * @param eRet  Return status
+ * 
+ * @return shell return code
+ */
+int DroidMain::interpretReturn(enum ControllerInterface::ReturnStatus eRet) const
+{
+    int iRet = 0;
+
+    switch(eRet)
+    {
+        case ControllerInterface::StatusShutdown:
+            iRet = system("sudo halt -p");
+            break;
+        case ControllerInterface::StatusRestart:
+            iRet = system("sudo reboot");
+            break;
+        case ControllerInterface::StatusOK:
+            break;
+        case ControllerInterface::StatusError:
+            iRet = 1;
+            break;
+        default:
+            iRet = 10;
+            break;
+    }
+
+    return iRet;
+}

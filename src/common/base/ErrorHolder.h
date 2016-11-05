@@ -16,25 +16,23 @@
  * 
  */
 
-#include <stdio.h>
+#ifndef _ERRORHOLDER_H
+#define _ERRORHOLDER_H
 
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include <string>
 
-/** 
- * Main entry point
- * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+/**
+ * Base for any class that can error or hold an error message
  */
-int main (int argc, char **argv)
+class ErrorHolder
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
+    public:
+        bool hasError();
+        const std::string &getError() const;
+        void setError(const std::string &strError);
 
-    int iRet = tMain.run();
+    protected:
+        std::string strError;
+};
 
-    printf("Droid operations completed.\n");
-    return iRet;
-}
+#endif

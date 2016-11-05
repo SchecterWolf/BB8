@@ -16,25 +16,36 @@
  * 
  */
 
-#include <stdio.h>
+#include "ErrorHolder.h"
 
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+using namespace std;
 
 /** 
- * Main entry point
+ * Check if an error exists
  * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+ * @return true if there's an error, false otherwise
  */
-int main (int argc, char **argv)
+bool ErrorHolder::hasError()
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
+    return !strError.empty();
+}
 
-    int iRet = tMain.run();
+/** 
+ * Get the error message, if any
+ * 
+ * @return Error message
+ */
+const string &ErrorHolder::getError() const
+{
+    return strError;
+}
 
-    printf("Droid operations completed.\n");
-    return iRet;
+/** 
+ * Set an error message
+ * 
+ * @param strError Error message
+ */
+void ErrorHolder::setError(const string &strError)
+{
+    this->strError = strError;
 }

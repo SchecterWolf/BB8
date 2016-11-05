@@ -4,3 +4,4 @@ target/x86-linux
 *.swp
 *.o
 *.d
+*.vlgd

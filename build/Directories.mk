@@ -18,10 +18,13 @@
 
 # Alphabetical
 SRC_MODULES := \
-					src/common/commondefs \
+					src/common/base \
+					src/common/system \
 					src/config \
 					src/controller \
 					src/directives/followme \
+					src/directives/manager \
+					src/directives/core \
 					src/main/sub \
 					src/main/utils \
 					src/utils \

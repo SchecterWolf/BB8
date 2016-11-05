@@ -16,32 +16,35 @@
  * 
  */
 
-#ifndef _DROIDMAIN_H
-#define _DROIDMAIN_H
+#ifndef _CONTROLLERINTERFACE_H
+#define _CONTROLLERINTERFACE_H
 
 #include "CMDLineArgs.h"
-#include "ControllerInterface.h"
-#include "BBConfig.h"
 
 /**
- * Entry point for droid operations
+ * This functions as the robot control interface which starts and stops directive task.
+ * It will serve as a human control interface that will interact with a user in order
+ * to control the robots functions.
+ * If indicated by the program command args, it may perform only certain functions
+ * without interacting to human input
  */
-class DroidMain final
+class ControllerInterface
 {
     public:
-        DroidMain(const T_Arguments &tArgs);
-        ~DroidMain();
+        enum ReturnStatus
+        {
+            StatusOK = 0,
+            StatusError,
+            StatusShutdown,
+            StatusRestart
+        };
 
-        int run();
+        ControllerInterface(const T_Arguments &tArgs);
+        virtual ~ControllerInterface();
 
+        enum ReturnStatus run();
     private:
-        BBConfig *ptConfig;
-        T_Arguments tArgs;
-        ControllerInterface tInterfaceCtrl;
-
-        void initGlobalLogger() const;
-        bool readConfig();
-        int interpretReturn(enum ControllerInterface::ReturnStatus eRet) const;
+         const T_Arguments &tArgs;
 };
 
 #endif

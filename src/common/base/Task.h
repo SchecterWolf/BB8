@@ -16,25 +16,24 @@
  * 
  */
 
-#include <stdio.h>
+#ifndef _BB8TASK_H
+#define _BB8TASK_H
 
-#include "CMDLineParser.h"
-#include "DroidMain.h"
+#include "Threadable.h"
 
-/** 
- * Main entry point
- * 
- * @param argc  Num cmd args
- * @param argv  cmd args
- * 
- * @return 0 success, or error number
+/**
+ * Base for any class that can be ran as an asynchronous task
  */
-int main (int argc, char **argv)
+class Task : public Threadable
 {
-    DroidMain tMain(CMDLineParser(argc, argv).getArgs());
+    public:
+        Task();
+        virtual ~Task();
 
-    int iRet = tMain.run();
+        void anchorPoint();
 
-    printf("Droid operations completed.\n");
-    return iRet;
-}
+    protected:
+        virtual void threadEntryPoint() = 0;
+};
+
+#endif

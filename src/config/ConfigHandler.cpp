@@ -47,7 +47,7 @@ BBConfig *ConfigHandler::readConfigFile(const string &strFileName) const
             if (ptSector->parseSector(strFileData, &uiOffset))
             {
                 ptConfig->addSector(unique_ptr<ConfigSector>(ptSector));
-                ptSector = NULL;
+                ptSector = nullptr;
             }
 
             delete ptSector;
