@@ -35,7 +35,7 @@ ConsoleLogger::ConsoleLogger()
     addFormatter(new LogTimeFormat());
     addFormatter(new LogColorLevelFormat());
     addFormatter(new LogCategoryFormat());
-    addFormatter(new LogSourceFormat());
+    //addFormatter(new LogSourceFormat());
 }
 
 /** 

@@ -31,6 +31,12 @@ class SystemCheck : public ErrorHolder
         virtual ~SystemCheck();
 
         bool runCheck();
+
+    private:
+        bool checkTemps();
+        bool checkBattery();
+        bool checkBluetooth();
+        bool checkGPIO();
 };
 
 #endif

@@ -9,6 +9,8 @@
 # 			BINEXT 		OS defined extension
 # 			MKDIR 		Make directory command
 #
+# 			ARCH 		Hardware architecture type
+#
 # 			CXXFLAGS 	c++ flags
 # 			FINAL_FLAGS 	additional flags for main make target
 # 			FLAGS 		top level directive flags
@@ -76,20 +78,20 @@ LDFLAGS?=
 # Target specific variables
 ifeq ($(TARGET), x86-linux)
 	CXX=g++
-	OS=linux
+	ARCH = x86
 else ifeq ($(TARGET), aarch64-linux-gnu-g++-4.8)
 	CXX=aarch64-linux-gnu-g++-4.8
-	OS=linux
+	ARCH = arm
 else ifeq ($(TARGET), arm-linux-gnueabihf-g++-4.8)
 	CXX=arm-linux-gnueabihf-g++-4.8
-	OS=linux
+	ARCH = arm
 else
 	$(error Invalid target: $(TARGET))
 endif
 
-# OS defined naming conventions
-ifeq ($(OS), linux)
-	BINEXT?=
+# Hardware architecture include
+ifeq ($(ARCH), arm)
+	CXXFLAGS += -D IS_PI3
 endif
 
 # Default directive = 'all'

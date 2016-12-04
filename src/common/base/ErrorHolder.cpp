@@ -23,11 +23,11 @@ using namespace std;
 /** 
  * Check if an error exists
  * 
- * @return true if there's an error, false otherwise
+ * @return true if there's no error, false if there is
  */
-bool ErrorHolder::hasError()
+bool ErrorHolder::isOK()
 {
-    return !strError.empty();
+    return strError.empty();
 }
 
 /** 
@@ -44,8 +44,11 @@ const string &ErrorHolder::getError() const
  * Set an error message
  * 
  * @param strError Error message
+ *
+ * @return false
  */
-void ErrorHolder::setError(const string &strError)
+bool ErrorHolder::setError(const string &strError)
 {
     this->strError = strError;
+    return false;
 }

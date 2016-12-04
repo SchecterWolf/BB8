@@ -78,3 +78,9 @@ console: [0,1]
 
 Turn file loggin on or ogg
 file: [abs/path/to/filename.txt]
+
+
+
+
+Dependencies:
+libsensors4

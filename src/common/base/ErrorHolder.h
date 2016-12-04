@@ -27,9 +27,9 @@
 class ErrorHolder
 {
     public:
-        bool hasError();
+        bool isOK();
         const std::string &getError() const;
-        void setError(const std::string &strError);
+        bool setError(const std::string &strError);
 
     protected:
         std::string strError;

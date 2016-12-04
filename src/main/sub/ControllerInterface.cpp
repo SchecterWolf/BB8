@@ -18,6 +18,7 @@
 
 #include "ControllerInterface.h"
 #include "Log.h"
+#include "SystemCheck.h"
 
 /** 
  * ControllerInterface contructor
@@ -45,6 +46,13 @@ ControllerInterface::~ControllerInterface()
  */
 enum ControllerInterface::ReturnStatus ControllerInterface::run()
 {
-    logDebug(General, "Start controller interface");
-    return StatusOK;
+    enum ReturnStatus eRet = StatusOK;
+
+    logInfo(General, "Starting main controller interface");
+
+    // Check if the system is ok before we begin to start up the robot
+    if (!SystemCheck().runCheck())
+        eRet = StatusError;
+
+    return eRet;
 }

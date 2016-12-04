@@ -35,12 +35,10 @@ OBJDIR=$(BB8_TARGET)
 #endif
 
 #
-# Flags
+# Linking Flags
 #
 #CFLAGS+=-I$(BB8_INC)
-ifeq ($(OS), linux)
-	LDFLAGS+=-lpthread -ldl
-endif
+LDFLAGS+=-lpthread -ldl -lsensors -lbluetooth
 
 #
 # Make Directives
